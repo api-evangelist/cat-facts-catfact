@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cat-facts-catfact/refs/heads/main/json-schema/cat-facts-catfact-pagination-link-schema.json",
+  "title": "PaginationLink",
+  "description": "A single navigation link in a Laravel-style paginator response.",
+  "type": "object",
+  "properties": {
+    "url": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Target URL of the link, or null for disabled controls.",
+      "example": "https://catfact.ninja/facts?page=2"
+    },
+    "label": {
+      "type": "string",
+      "description": "Display label (page number, Previous, Next, or ...).",
+      "example": "2"
+    },
+    "active": {
+      "type": "boolean",
+      "description": "Whether this link represents the current page.",
+      "example": false
+    }
+  }
+}

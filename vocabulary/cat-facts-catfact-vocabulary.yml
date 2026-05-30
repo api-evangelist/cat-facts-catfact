@@ -1,0 +1,167 @@
+vocabulary: "1.0.0"
+
+info:
+  provider: "Cat Facts (catfact.ninja)"
+  description: >-
+    Unified taxonomy for the Cat Facts (catfact.ninja) public API. Captures the
+    operational dimension (three GET endpoints over two domain entities — facts
+    and breeds, plus a Laravel-style pagination wrapper) and the capability
+    dimension (two Naftiko capability files — one per OpenAPI tag — each exposing
+    REST and MCP adapters).
+  created: "2026-05-30"
+  modified: "2026-05-30"
+
+# OPERATIONAL DIMENSION (from OpenAPI)
+operational:
+
+  apis:
+    - name: "Cat Facts API"
+      namespace: "cat-facts-catfact"
+      version: "1.0.0"
+      baseUrl: "https://catfact.ninja"
+      status: active
+
+  resources:
+    - name: "fact"
+      api: "cat-facts-catfact"
+      actions: [getRandom]
+      description: "Single random cat trivia fact."
+    - name: "facts"
+      api: "cat-facts-catfact"
+      actions: [list]
+      description: "Paginated collection of cat trivia facts."
+    - name: "breeds"
+      api: "cat-facts-catfact"
+      actions: [list]
+      description: "Paginated catalog of cat breeds with country, origin, coat, and pattern."
+
+  actions:
+    - name: getRandom
+      pattern: read
+      httpMethods: [GET]
+      description: "Return a single random instance of the resource."
+    - name: list
+      pattern: query
+      httpMethods: [GET]
+      description: "Return a paginated collection of the resource."
+
+  schemas:
+    core:
+      - name: CatFact
+        description: "A single cat trivia fact and its character length."
+        properties: [fact, length]
+      - name: Breed
+        description: "A cat breed entry with descriptive attributes."
+        properties: [breed, country, origin, coat, pattern]
+    pagination:
+      - name: PaginationLink
+        description: "Laravel paginator link entry."
+        properties: [url, label, active]
+      - name: CatFactList
+        description: "Paginated wrapper around CatFact."
+        properties: [current_page, data, first_page_url, from, last_page, last_page_url, links, next_page_url, path, per_page, prev_page_url, to, total]
+      - name: BreedList
+        description: "Paginated wrapper around Breed."
+        properties: [current_page, data, first_page_url, from, last_page, last_page_url, links, next_page_url, path, per_page, prev_page_url, to, total]
+    errors:
+      - name: Error
+        description: "Generic error response payload."
+        properties: [message]
+
+  parameters:
+    pagination:
+      - name: limit
+        in: query
+        type: integer
+        description: "Page size for list operations."
+        usedBy: [getFacts, getBreeds]
+    filters:
+      - name: max_length
+        in: query
+        type: integer
+        description: "Maximum character length for returned fact strings."
+        usedBy: [getRandomFact, getFacts]
+
+  enums: {}
+
+  authentication:
+    schemes: []
+    note: "No authentication required. The API is fully open."
+
+# CAPABILITY DIMENSION (from Naftiko)
+capability:
+
+  workflows:
+    - name: "Cat Facts API — Facts"
+      file: "capabilities/cat-facts-catfact-facts.yaml"
+      apis: ["cat-facts-catfact"]
+      tools: 2
+      personas: [tutorial-author, demo-builder]
+      domains: [trivia]
+      description: "Random facts and paginated lists of cat trivia."
+    - name: "Cat Facts API — Breeds"
+      file: "capabilities/cat-facts-catfact-breeds.yaml"
+      apis: ["cat-facts-catfact"]
+      tools: 1
+      personas: [tutorial-author, content-author]
+      domains: [catalog]
+      description: "Paginated catalog of cat breeds."
+
+  personas:
+    - id: tutorial-author
+      name: "Tutorial Author"
+      description: >-
+        Engineers and writers building API onboarding tutorials, SDK quickstarts,
+        and codelab content who need a free, no-auth REST API as the example.
+      workflows: ["Cat Facts API — Facts", "Cat Facts API — Breeds"]
+    - id: demo-builder
+      name: "Demo Builder"
+      description: >-
+        Developer relations and platform engineers wiring up demo apps, load
+        tests, and observability examples that need a stable public surface.
+      workflows: ["Cat Facts API — Facts"]
+    - id: content-author
+      name: "Content Author"
+      description: >-
+        Authors of pet-themed apps, blog content, and chatbots that need a small
+        reference catalog of cat breeds with descriptive attributes.
+      workflows: ["Cat Facts API — Breeds"]
+
+  domains:
+    - name: trivia
+      description: "Random fact retrieval, single or paginated."
+      resources: [fact, facts]
+      workflows: ["Cat Facts API — Facts"]
+    - name: catalog
+      description: "Reference catalog data — cat breeds with descriptive attributes."
+      resources: [breeds]
+      workflows: ["Cat Facts API — Breeds"]
+
+  namespaces:
+    - consumed: cat-facts-catfact-facts
+      rest: cat-facts-catfact-facts-rest
+      mcp: cat-facts-catfact-facts-mcp
+      restPort: 8080
+      mcpPort: 9090
+    - consumed: cat-facts-catfact-breeds
+      rest: cat-facts-catfact-breeds-rest
+      mcp: cat-facts-catfact-breeds-mcp
+      restPort: 8080
+      mcpPort: 9090
+
+  binds: []
+
+# CROSS-REFERENCE
+crossReference:
+  - resource: fact
+    operations: [getRandomFact]
+    workflows: ["Cat Facts API — Facts"]
+    personas: [tutorial-author, demo-builder]
+  - resource: facts
+    operations: [getFacts]
+    workflows: ["Cat Facts API — Facts"]
+    personas: [tutorial-author, demo-builder]
+  - resource: breeds
+    operations: [getBreeds]
+    workflows: ["Cat Facts API — Breeds"]
+    personas: [tutorial-author, content-author]

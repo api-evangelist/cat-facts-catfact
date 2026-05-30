@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cat-facts-catfact/refs/heads/main/json-schema/cat-facts-catfact-cat-fact-list-schema.json",
+  "title": "CatFactList",
+  "description": "Laravel-style paginated wrapper around a list of CatFact objects.",
+  "type": "object",
+  "properties": {
+    "current_page": { "type": "integer", "format": "int32", "example": 1 },
+    "data": {
+      "type": "array",
+      "items": { "$ref": "cat-facts-catfact-cat-fact-schema.json" }
+    },
+    "first_page_url": { "type": "string", "example": "https://catfact.ninja/facts?page=1" },
+    "from": { "type": [ "integer", "null" ], "format": "int32", "example": 1 },
+    "last_page": { "type": "integer", "format": "int32", "example": 111 },
+    "last_page_url": { "type": "string", "example": "https://catfact.ninja/facts?page=111" },
+    "links": {
+      "type": "array",
+      "items": { "$ref": "cat-facts-catfact-pagination-link-schema.json" }
+    },
+    "next_page_url": { "type": [ "string", "null" ], "example": "https://catfact.ninja/facts?page=2" },
+    "path": { "type": "string", "example": "https://catfact.ninja/facts" },
+    "per_page": { "type": "integer", "format": "int32", "example": 10 },
+    "prev_page_url": { "type": [ "string", "null" ], "example": null },
+    "to": { "type": [ "integer", "null" ], "format": "int32", "example": 10 },
+    "total": { "type": "integer", "format": "int32", "example": 332 }
+  }
+}

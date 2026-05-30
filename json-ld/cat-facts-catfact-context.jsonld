@@ -1,0 +1,111 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "catfact": "https://catfact.ninja/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "CatFact": "catfact:CatFact",
+    "Breed": "catfact:Breed",
+    "CatFactList": "catfact:CatFactList",
+    "BreedList": "catfact:BreedList",
+    "PaginationLink": "catfact:PaginationLink",
+
+    "fact": {
+      "@id": "catfact:fact",
+      "@type": "xsd:string"
+    },
+    "length": {
+      "@id": "catfact:length",
+      "@type": "xsd:integer"
+    },
+    "breed": {
+      "@id": "catfact:breed",
+      "@type": "xsd:string"
+    },
+    "country": {
+      "@id": "catfact:country",
+      "@type": "xsd:string"
+    },
+    "origin": {
+      "@id": "catfact:origin",
+      "@type": "xsd:string"
+    },
+    "coat": {
+      "@id": "catfact:coat",
+      "@type": "xsd:string"
+    },
+    "pattern": {
+      "@id": "catfact:pattern",
+      "@type": "xsd:string"
+    },
+
+    "currentPage": {
+      "@id": "catfact:current_page",
+      "@type": "xsd:integer"
+    },
+    "data": {
+      "@id": "catfact:data",
+      "@container": "@set"
+    },
+    "firstPageUrl": {
+      "@id": "catfact:first_page_url",
+      "@type": "@id"
+    },
+    "from": {
+      "@id": "catfact:from",
+      "@type": "xsd:integer"
+    },
+    "lastPage": {
+      "@id": "catfact:last_page",
+      "@type": "xsd:integer"
+    },
+    "lastPageUrl": {
+      "@id": "catfact:last_page_url",
+      "@type": "@id"
+    },
+    "links": {
+      "@id": "catfact:links",
+      "@container": "@set"
+    },
+    "nextPageUrl": {
+      "@id": "catfact:next_page_url",
+      "@type": "@id"
+    },
+    "path": {
+      "@id": "catfact:path",
+      "@type": "@id"
+    },
+    "perPage": {
+      "@id": "catfact:per_page",
+      "@type": "xsd:integer"
+    },
+    "prevPageUrl": {
+      "@id": "catfact:prev_page_url",
+      "@type": "@id"
+    },
+    "to": {
+      "@id": "catfact:to",
+      "@type": "xsd:integer"
+    },
+    "total": {
+      "@id": "catfact:total",
+      "@type": "xsd:integer"
+    },
+
+    "url": "schema:url",
+    "label": {
+      "@id": "catfact:label",
+      "@type": "xsd:string"
+    },
+    "active": {
+      "@id": "catfact:active",
+      "@type": "xsd:boolean"
+    },
+
+    "name": "schema:name",
+    "description": "schema:description",
+    "identifier": "dcterms:identifier"
+  }
+}

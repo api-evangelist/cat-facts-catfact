@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cat-facts-catfact/refs/heads/main/json-structure/cat-facts-catfact-breed-structure.json",
+  "name": "Breed",
+  "description": "A cat breed entry with descriptive attributes.",
+  "type": "object",
+  "properties": {
+    "breed": {
+      "type": "string",
+      "description": "Common breed name.",
+      "example": "Abyssinian"
+    },
+    "country": {
+      "type": "string",
+      "description": "Country the breed is associated with.",
+      "example": "Ethiopia"
+    },
+    "origin": {
+      "type": "string",
+      "description": "Origin classification (Natural/Standard, Mutation, Crossbreed, etc.).",
+      "example": "Natural/Standard"
+    },
+    "coat": {
+      "type": "string",
+      "description": "Coat length descriptor (Short, Semi-long, Long, Hairless).",
+      "example": "Short"
+    },
+    "pattern": {
+      "type": "string",
+      "description": "Coat pattern descriptor.",
+      "example": "Ticked"
+    }
+  },
+  "required": [
+    "breed",
+    "country",
+    "origin",
+    "coat",
+    "pattern"
+  ]
+}

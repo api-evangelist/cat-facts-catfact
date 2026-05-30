@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cat-facts-catfact/refs/heads/main/json-structure/cat-facts-catfact-cat-fact-structure.json",
+  "name": "CatFact",
+  "description": "A single cat trivia fact and its character length.",
+  "type": "object",
+  "properties": {
+    "fact": {
+      "type": "string",
+      "description": "The cat fact text.",
+      "example": "Cats sleep 70% of their lives."
+    },
+    "length": {
+      "type": "int32",
+      "description": "Character length of the fact string.",
+      "example": 30
+    }
+  },
+  "required": [
+    "fact",
+    "length"
+  ]
+}

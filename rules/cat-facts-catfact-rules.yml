@@ -1,0 +1,374 @@
+# Spectral ruleset for the Cat Facts (catfact.ninja) API.
+#
+# Derived from analysis of openapi/cat-facts-catfact-openapi.yml.
+# The Cat Facts surface is intentionally small (3 GET endpoints, 2 domain schemas plus
+# Laravel-style pagination wrappers, no authentication), so the rules prefer
+# strict, low-cost consistency checks that catch drift if the surface grows.
+
+extends: [[spectral:oas, all]]
+
+rules:
+
+  # ── INFO / METADATA ───────────────────────────────────────────────────────────
+  info-contact-email-required:
+    description: info.contact.email must be present and use the catfact.ninja domain.
+    message: "{{path}} info.contact.email must be a catfact.ninja address."
+    severity: warn
+    given: $.info.contact
+    then:
+      field: email
+      function: pattern
+      functionOptions:
+        match: "^[A-Za-z0-9._%+-]+@catfact\\.ninja$"
+
+  info-title-prefix-cat-facts:
+    description: info.title must begin with "Cat Facts" so consumers can identify the provider.
+    message: "info.title must start with 'Cat Facts'."
+    severity: warn
+    given: $.info
+    then:
+      field: title
+      function: pattern
+      functionOptions:
+        match: "^Cat Facts"
+
+  info-description-min-length:
+    description: info.description must be at least 80 characters and explain the surface.
+    severity: warn
+    given: $.info
+    then:
+      field: description
+      function: length
+      functionOptions:
+        min: 80
+
+  # ── OPENAPI VERSION ───────────────────────────────────────────────────────────
+  openapi-version-3-required:
+    description: Use OpenAPI 3.0.x or later — never Swagger 2.0.
+    severity: error
+    given: $
+    then:
+      field: openapi
+      function: pattern
+      functionOptions:
+        match: "^3\\."
+
+  # ── SERVERS ───────────────────────────────────────────────────────────────────
+  servers-https-only:
+    description: Every server URL must use HTTPS.
+    severity: error
+    given: $.servers[*]
+    then:
+      field: url
+      function: pattern
+      functionOptions:
+        match: "^https://"
+
+  servers-must-be-catfact-ninja:
+    description: Server host must be catfact.ninja — there are no staging or per-tenant hosts.
+    severity: warn
+    given: $.servers[*]
+    then:
+      field: url
+      function: pattern
+      functionOptions:
+        match: "^https://catfact\\.ninja(/|$)"
+
+  servers-description-required:
+    description: Server entries must include a description.
+    severity: warn
+    given: $.servers[*]
+    then:
+      field: description
+      function: truthy
+
+  # ── PATHS / NAMING ────────────────────────────────────────────────────────────
+  paths-kebab-case:
+    description: Path segments must be lowercase kebab-case (a-z, 0-9, hyphen).
+    message: "{{path}} must use lowercase kebab-case segments."
+    severity: warn
+    given: $.paths.*~
+    then:
+      function: pattern
+      functionOptions:
+        match: "^/[a-z0-9]+(-[a-z0-9]+)*(/[a-z0-9]+(-[a-z0-9]+)*)*$"
+
+  paths-no-trailing-slash:
+    description: Paths must not end with a trailing slash (except the root).
+    severity: error
+    given: $.paths.*~
+    then:
+      function: pattern
+      functionOptions:
+        notMatch: ".+/$"
+
+  paths-no-query-string:
+    description: Paths must not embed query strings — declare parameters instead.
+    severity: error
+    given: $.paths.*~
+    then:
+      function: pattern
+      functionOptions:
+        notMatch: "\\?"
+
+  # ── OPERATIONS ────────────────────────────────────────────────────────────────
+  operation-operationid-required:
+    description: Every operation must declare an operationId.
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: operationId
+      function: truthy
+
+  operation-operationid-camel-case:
+    description: operationId must be camelCase (e.g. getRandomFact, getFacts, getBreeds).
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: operationId
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]*$"
+
+  operation-summary-required:
+    description: Every operation must include a summary.
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: summary
+      function: truthy
+
+  operation-summary-title-case:
+    description: >-
+      Operation summaries must use Title Case (every word capitalised except small
+      words such as a/an/the/and/or/of/in/on/at/to/by/for/from/with/as/is/it/its/vs/via).
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: summary
+      function: pattern
+      functionOptions:
+        match: "^([A-Z][A-Za-z0-9]*)(\\s+(of|a|an|the|and|or|but|nor|in|on|at|to|by|for|from|with|as|is|it|its|vs|via|[A-Z][A-Za-z0-9]*))*$"
+
+  operation-description-required:
+    description: Every operation must include a description.
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: description
+      function: truthy
+
+  operation-tags-required:
+    description: Every operation must declare at least one tag.
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: tags
+      function: schema
+      functionOptions:
+        schema:
+          type: array
+          minItems: 1
+
+  operation-get-no-request-body:
+    description: GET operations must not declare a requestBody.
+    severity: error
+    given: $.paths[*].get
+    then:
+      field: requestBody
+      function: undefined
+
+  # ── TAGS ──────────────────────────────────────────────────────────────────────
+  tags-global-defined:
+    description: A global tags array must be defined.
+    severity: warn
+    given: $
+    then:
+      field: tags
+      function: truthy
+
+  tags-title-case:
+    description: Tag names must be Title Case (Facts, Breeds).
+    severity: warn
+    given: $.tags[*]
+    then:
+      field: name
+      function: pattern
+      functionOptions:
+        match: "^[A-Z][A-Za-z0-9]*( [A-Z][A-Za-z0-9]*)*$"
+
+  tags-description-required:
+    description: Each global tag must have a description.
+    severity: warn
+    given: $.tags[*]
+    then:
+      field: description
+      function: truthy
+
+  # ── PARAMETERS ────────────────────────────────────────────────────────────────
+  parameter-snake-case:
+    description: Query parameter names must be snake_case (e.g. max_length).
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].parameters[?(@.in=='query')]
+    then:
+      field: name
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-z0-9_]*$"
+
+  parameter-description-required:
+    description: Every parameter must include a description.
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].parameters[*]
+    then:
+      field: description
+      function: truthy
+
+  parameter-schema-type-required:
+    description: Every parameter schema must declare a type.
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].parameters[*].schema
+    then:
+      field: type
+      function: truthy
+
+  parameter-limit-is-integer:
+    description: The 'limit' query parameter must be an integer.
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].parameters[?(@.name=='limit')].schema
+    then:
+      field: type
+      function: pattern
+      functionOptions:
+        match: "^integer$"
+
+  parameter-max-length-is-integer:
+    description: The 'max_length' query parameter must be an integer.
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].parameters[?(@.name=='max_length')].schema
+    then:
+      field: type
+      function: pattern
+      functionOptions:
+        match: "^integer$"
+
+  # ── RESPONSES ─────────────────────────────────────────────────────────────────
+  response-200-required:
+    description: Every operation must define a 200 response.
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete].responses
+    then:
+      field: "200"
+      function: truthy
+
+  response-description-required:
+    description: Every response must include a description.
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].responses[*]
+    then:
+      field: description
+      function: truthy
+
+  response-json-content-required:
+    description: 200 responses must include application/json content.
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].responses["200"].content
+    then:
+      field: application/json
+      function: truthy
+
+  response-error-message-field:
+    description: Error response schemas should expose a 'message' field.
+    severity: info
+    given: $.components.schemas.Error
+    then:
+      field: properties.message
+      function: truthy
+
+  # ── SCHEMAS ───────────────────────────────────────────────────────────────────
+  schema-snake-case-properties:
+    description: Schema property names must be snake_case (matches the API's existing style).
+    severity: warn
+    given: $.components.schemas[*].properties.*~
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-z0-9_]*$"
+
+  schema-description-required:
+    description: Top-level schemas in components must include a description.
+    severity: warn
+    given: $.components.schemas[*]
+    then:
+      field: description
+      function: truthy
+
+  schema-type-required:
+    description: Top-level schemas in components must declare a type.
+    severity: warn
+    given: $.components.schemas[*]
+    then:
+      field: type
+      function: truthy
+
+  schema-pagination-shape:
+    description: Paginated list schemas must include current_page, data, per_page, total.
+    severity: warn
+    given: $.components.schemas[?(@.title && @.title.match(/List$/))]
+    then:
+      field: properties
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          required:
+            - current_page
+            - data
+            - per_page
+            - total
+
+  # ── SECURITY ──────────────────────────────────────────────────────────────────
+  security-empty-array-allowed:
+    description: >-
+      The Cat Facts API requires no authentication. An empty global security array is
+      acceptable. This rule documents that decision rather than enforcing one.
+    severity: info
+    given: $
+    then:
+      field: security
+      function: defined
+
+  # ── HTTP METHOD CONVENTIONS ───────────────────────────────────────────────────
+  only-get-methods:
+    description: >-
+      The Cat Facts API is read-only. Only GET operations are allowed.
+    severity: warn
+    given: $.paths[*]
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          not:
+            anyOf:
+              - required: ["post"]
+              - required: ["put"]
+              - required: ["patch"]
+              - required: ["delete"]
+
+  # ── GENERAL QUALITY ───────────────────────────────────────────────────────────
+  examples-on-operation-responses:
+    description: 2xx responses should include at least one named example for mock servers.
+    severity: info
+    given: $.paths[*][get,post,put,patch,delete].responses["200"].content.application/json
+    then:
+      field: examples
+      function: truthy
+
+  microcks-operation-extension:
+    description: Each operation should declare an x-microcks-operation block for mocking.
+    severity: info
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: x-microcks-operation
+      function: truthy
