@@ -1,11 +1,11 @@
 aid: cat-facts-catfact
 name: Cat Facts (catfact.ninja)
 description: >-
-  Cat Facts is a free, no-authentication community REST API at catfact.ninja that serves random
-  cat trivia and a catalog of cat breeds. It exposes three documented endpoints — a single random
-  fact, a paginated list of facts, and a paginated list of breeds — and ships a Swagger UI based
-  OpenAPI 3.0 document at /docs. The service is widely used in API onboarding tutorials, demos,
-  and sample apps because it requires no API key and returns small, predictable JSON payloads.
+  Cat Facts is a free, no-authentication community REST API at catfact.ninja that serves random cat trivia and a catalog
+  of cat breeds. It exposes three documented endpoints — a single random fact, a paginated list of facts, and a
+  paginated list of breeds — and ships a Swagger UI based OpenAPI 3.0 document at /docs. The service is widely used in
+  API onboarding tutorials, demos, and sample apps because it requires no API key and returns small, predictable JSON
+  payloads.
 url: https://catfact.ninja/
 image: https://catfact.ninja/docs/asset/favicon-32x32.png
 specificationVersion: '0.20'
@@ -27,9 +27,9 @@ tags:
 apis:
   - name: Cat Facts API
     description: >-
-      REST API exposing random cat trivia and a catalog of cat breeds. Three GET endpoints —
-      /fact (a single random fact), /facts (paginated list of facts) and /breeds (paginated
-      list of breeds) — return Laravel-style paginated JSON for the list endpoints.
+      REST API exposing random cat trivia and a catalog of cat breeds. Three GET endpoints — /fact (a single random
+      fact), /facts (paginated list of facts) and /breeds (paginated list of breeds) — return Laravel-style paginated
+      JSON for the list endpoints.
     humanURL: https://catfact.ninja/
     baseURL: https://catfact.ninja
     image: https://catfact.ninja/docs/asset/favicon-32x32.png
@@ -47,10 +47,6 @@ apis:
         url: openapi/cat-facts-catfact-openapi.yml
       - type: OpenAPISource
         url: https://catfact.ninja/docs?api-docs.json
-      - type: NaftikoCapability
-        url: capabilities/cat-facts-catfact-facts.yaml
-      - type: NaftikoCapability
-        url: capabilities/cat-facts-catfact-breeds.yaml
 common:
   - type: Website
     url: https://catfact.ninja/
@@ -83,54 +79,49 @@ common:
 features:
   - name: Free and Open
     description: >-
-      No API key, no signup, no quota header. Anyone can hit catfact.ninja and start getting JSON
-      back. Ideal for first-class onboarding examples in tutorials and SDK quickstarts.
+      No API key, no signup, no quota header. Anyone can hit catfact.ninja and start getting JSON back. Ideal for
+      first-class onboarding examples in tutorials and SDK quickstarts.
   - name: Paginated Listings
     description: >-
-      The /facts and /breeds endpoints return Laravel-style paginated responses with current_page,
-      last_page, per_page, total, and a links array suitable for "next/prev" UI patterns.
+      The /facts and /breeds endpoints return Laravel-style paginated responses with current_page, last_page, per_page,
+      total, and a links array suitable for "next/prev" UI patterns.
   - name: Length-Filtered Facts
     description: >-
-      Both /fact and /facts accept a max_length query parameter, letting clients restrict trivia
-      length for SMS-friendly, push-notification-friendly, or banner use cases.
+      Both /fact and /facts accept a max_length query parameter, letting clients restrict trivia length for
+      SMS-friendly, push-notification-friendly, or banner use cases.
   - name: Self-Describing OpenAPI
     description: >-
-      A live OpenAPI 3.0 document is published at /docs?api-docs.json and rendered as Swagger UI
-      at /docs — usable directly by codegen tools, Postman import, and AI agent toolkits.
+      A live OpenAPI 3.0 document is published at /docs?api-docs.json and rendered as Swagger UI at /docs — usable
+      directly by codegen tools, Postman import, and AI agent toolkits.
 useCases:
   - name: API Onboarding Tutorials
     description: >-
-      Used in countless "hello-world" REST tutorials because it returns small JSON, requires no
-      auth, and is CORS-friendly. A canonical first call for browsers, mobile apps, and SDKs.
+      Used in countless "hello-world" REST tutorials because it returns small JSON, requires no auth, and is
+      CORS-friendly. A canonical first call for browsers, mobile apps, and SDKs.
   - name: SMS and Chatbot Daily Facts
     description: >-
-      The original Cat Facts service became a meme around texting friends a daily cat fact.
-      catfact.ninja is the easiest backend for any "daily fact" bot, including SMS, Discord, and
-      Slack integrations.
+      The original Cat Facts service became a meme around texting friends a daily cat fact. catfact.ninja is the easiest
+      backend for any "daily fact" bot, including SMS, Discord, and Slack integrations.
   - name: Load Testing and Demo Apps
     description: >-
-      Engineering teams point load generators, screen-recording demos, and observability sample
-      apps at catfact.ninja because it tolerates traffic, returns tiny payloads, and never
-      requires credential rotation.
+      Engineering teams point load generators, screen-recording demos, and observability sample apps at catfact.ninja
+      because it tolerates traffic, returns tiny payloads, and never requires credential rotation.
   - name: MCP and Agent Tool Demos
     description: >-
-      Several community Model Context Protocol servers wrap catfact.ninja as a "hello world" tool
-      because the surface is small, safe, and read-only — perfect for showing Claude using a tool.
+      Several community Model Context Protocol servers wrap catfact.ninja as a "hello world" tool because the surface is
+      small, safe, and read-only — perfect for showing Claude using a tool.
 integrations:
   - name: Public APIs Index
-    description: >-
-      Listed in the popular public-apis/public-apis index as a free, no-auth Animals API.
+    description: Listed in the popular public-apis/public-apis index as a free, no-auth Animals API.
   - name: Community MCP Servers
-    description: >-
-      At least three community-built MCP servers wrap the catfact.ninja endpoints as Claude tools.
+    description: At least three community-built MCP servers wrap the catfact.ninja endpoints as Claude tools.
   - name: Swagger UI
-    description: >-
-      Ships a live Swagger UI at https://catfact.ninja/ that imports the OpenAPI spec from /docs.
+    description: Ships a live Swagger UI at https://catfact.ninja/ that imports the OpenAPI spec from /docs.
 solutions:
   - name: Lowest-Friction Demo API
     description: >-
-      When you need a public, free, no-auth REST API to demo SDK generation, OpenAPI tooling,
-      mock servers, or agent tool calls, catfact.ninja is the smallest acceptable surface area.
+      When you need a public, free, no-auth REST API to demo SDK generation, OpenAPI tooling, mock servers, or agent
+      tool calls, catfact.ninja is the smallest acceptable surface area.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
