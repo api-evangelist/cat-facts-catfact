@@ -1,0 +1,89 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cat Facts API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Facts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Random Fact",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catfact.ninja/fact",
+            "params": [
+              {
+                "name": "max_length",
+                "value": "",
+                "type": "query",
+                "description": "Maximum length, in characters, of the returned fact."
+              }
+            ]
+          },
+          "docs": "Returns a single random cat fact. An optional max_length query parameter caps the returned fact length, which is useful for SMS, push notifications, and any other length-constrained surface."
+        },
+        {
+          "info": {
+            "name": "Get a List of Facts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catfact.ninja/facts",
+            "params": [
+              {
+                "name": "max_length",
+                "value": "",
+                "type": "query",
+                "description": "Maximum length, in characters, of each returned fact."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of facts to return per page."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of cat facts. Supports max_length (character cap per fact) and limit (page size) query parameters. The response follows Laravel's paginator format with current_page, per_page, total, last_page, links, and a data array of CatFact objects."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Breeds",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a List of Breeds",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catfact.ninja/breeds",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of breeds to return per page."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of cat breeds with country, origin, coat, and pattern attributes. Supports a limit query parameter for page size. The response follows Laravel's paginator format with current_page, per_page, total, last_page, links, and a data array of Breed objects."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

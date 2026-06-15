@@ -1,0 +1,339 @@
+{
+  "item": [
+    {
+      "id": "73ba7557-3438-4127-93b7-312cca16f7e9",
+      "name": "Facts",
+      "description": {
+        "content": "Random cat trivia, individually or in paginated lists.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "545cc31a-8565-4500-a4d9-559acef58f15",
+          "name": "Get Random Fact",
+          "request": {
+            "name": "Get Random Fact",
+            "description": {
+              "content": "Returns a single random cat fact. An optional max_length query parameter caps the returned fact length, which is useful for SMS, push notifications, and any other length-constrained surface.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fact"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "max_length",
+                  "value": "<integer>",
+                  "description": "Maximum length, in characters, of the returned fact."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "504e22ca-f828-491e-9bb1-c0b088cd8edf",
+              "name": "A random cat fact.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fact"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "max_length",
+                      "value": "140"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"fact\": \"People who are allergic to cats are actually allergic to cat saliva or to cat dander.\",\n  \"length\": 89\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a521fdbd-0f67-4116-a80a-5b402f64c5a6",
+              "name": "No fact matched the given constraints.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fact"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "max_length",
+                      "value": "140"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Fact not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eef2092b-6b87-4006-80cb-bd203ee67c63",
+          "name": "Get a List of Facts",
+          "request": {
+            "name": "Get a List of Facts",
+            "description": {
+              "content": "Returns a paginated list of cat facts. Supports max_length (character cap per fact) and limit (page size) query parameters. The response follows Laravel's paginator format with current_page, per_page, total, last_page, links, and a data array of CatFact objects.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "facts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "max_length",
+                  "value": "<integer>",
+                  "description": "Maximum length, in characters, of each returned fact."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of facts to return per page."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5a1be9f1-eed7-4bf0-864f-5374be2d6cff",
+              "name": "A paginated list of cat facts.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "facts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "max_length",
+                      "value": "140"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"current_page\": 1,\n  \"data\": [\n    {\n      \"fact\": \"Unlike dogs, cats do not have a sweet tooth.\",\n      \"length\": 45\n    },\n    {\n      \"fact\": \"When a cat chases its prey, it keeps its head level.\",\n      \"length\": 53\n    }\n  ],\n  \"first_page_url\": \"https://catfact.ninja/facts?page=1\",\n  \"from\": 1,\n  \"last_page\": 111,\n  \"last_page_url\": \"https://catfact.ninja/facts?page=111\",\n  \"next_page_url\": \"https://catfact.ninja/facts?page=2\",\n  \"path\": \"https://catfact.ninja/facts\",\n  \"per_page\": 2,\n  \"prev_page_url\": null,\n  \"to\": 2,\n  \"total\": 332\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "6577d566-9816-4ce4-8e51-2a040d29056c",
+      "name": "Breeds",
+      "description": {
+        "content": "Catalog of cat breeds with country, origin, coat, and pattern.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "482f5119-5ad3-4819-923f-3fda13f12c50",
+          "name": "Get a List of Breeds",
+          "request": {
+            "name": "Get a List of Breeds",
+            "description": {
+              "content": "Returns a paginated list of cat breeds with country, origin, coat, and pattern attributes. Supports a limit query parameter for page size. The response follows Laravel's paginator format with current_page, per_page, total, last_page, links, and a data array of Breed objects.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "breeds"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of breeds to return per page."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "079022d8-87d0-420c-ae99-7f5fed5b5886",
+              "name": "A paginated list of cat breeds.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "breeds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"current_page\": 1,\n  \"data\": [\n    {\n      \"breed\": \"Abyssinian\",\n      \"country\": \"Ethiopia\",\n      \"origin\": \"Natural/Standard\",\n      \"coat\": \"Short\",\n      \"pattern\": \"Ticked\"\n    },\n    {\n      \"breed\": \"Aegean\",\n      \"country\": \"Greece\",\n      \"origin\": \"Natural/Standard\",\n      \"coat\": \"Semi-long\",\n      \"pattern\": \"Bi- or tri-colored\"\n    }\n  ],\n  \"first_page_url\": \"https://catfact.ninja/breeds?page=1\",\n  \"from\": 1,\n  \"last_page\": 49,\n  \"last_page_url\": \"https://catfact.ninja/breeds?page=49\",\n  \"next_page_url\": \"https://catfact.ninja/breeds?page=2\",\n  \"path\": \"https://catfact.ninja/breeds\",\n  \"per_page\": 2,\n  \"prev_page_url\": null,\n  \"to\": 2,\n  \"total\": 98\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://catfact.ninja",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "9c833400-efad-4311-83e3-25e6f4144e77",
+    "name": "Cat Facts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "A free, no-authentication REST API at catfact.ninja serving random cat trivia and a catalog of cat breeds. Three GET endpoints: /fact (a single random fact), /facts (paginated list of facts), and /breeds (paginated list of breeds). Designed as a canonical \"hello world\" public API for tutorials, demos, and agent tool examples.\n\nContact Support:\n Name: Cat Facts API\n Email: contact@catfact.ninja",
+      "type": "text/plain"
+    }
+  }
+}
