@@ -48,6 +48,8 @@ apis:
       - type: OpenAPISource
         url: https://catfact.ninja/docs?api-docs.json
 common:
+  - type: AgenticAccess
+    url: agentic-access/cat-facts-catfact-agentic-access.yml
   - type: DomainSecurity
     url: security/cat-facts-catfact-domain-security.yml
   - type: Website
