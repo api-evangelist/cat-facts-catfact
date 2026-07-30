@@ -7,6 +7,17 @@ description: >-
   API onboarding tutorials, demos, and sample apps because it requires no API key and returns small, predictable JSON
   payloads.
 url: https://catfact.ninja/
+accessModel:
+  pricing: unknown
+  onboarding: open
+  trial: false
+  try_now: false
+  public: true
+  label: Open access
+  confidence: medium
+  source: []
+  generated: '2026-07-22'
+  method: derived
 image: https://catfact.ninja/docs/asset/favicon-32x32.png
 specificationVersion: '0.20'
 created: '2026-05-28'
@@ -25,28 +36,38 @@ tags:
   - No Authentication
   - REST
 apis:
-  - name: Cat Facts API
-    description: >-
-      REST API exposing random cat trivia and a catalog of cat breeds. Three GET endpoints — /fact (a single random
-      fact), /facts (paginated list of facts) and /breeds (paginated list of breeds) — return Laravel-style paginated
-      JSON for the list endpoints.
-    humanURL: https://catfact.ninja/
-    baseURL: https://catfact.ninja
-    image: https://catfact.ninja/docs/asset/favicon-32x32.png
-    tags:
-      - Animals
-      - Cats
-      - Trivia
-      - Public APIs
-    properties:
-      - type: Documentation
-        url: https://catfact.ninja/
-      - type: SwaggerUI
-        url: https://catfact.ninja/
-      - type: OpenAPI
-        url: openapi/cat-facts-catfact-openapi.yml
-      - type: OpenAPISource
-        url: https://catfact.ninja/docs?api-docs.json
+- aid: cat-facts-catfact:cat-facts-catfact-breeds-api
+  name: Cat Facts (catfact.ninja) Breeds API
+  description: Catalog of cat breeds with country, origin, coat, and pattern.
+  humanURL: https://catfact.ninja/
+  baseURL: https://catfact.ninja
+  tags:
+  - Breeds
+  properties:
+  - type: OpenAPI
+    url: openapi/cat-facts-catfact-breeds-api-openapi.yml
+  - type: Documentation
+    url: https://catfact.ninja/
+  - type: SwaggerUI
+    url: https://catfact.ninja/
+  - type: OpenAPISource
+    url: https://catfact.ninja/docs?api-docs.json
+- aid: cat-facts-catfact:cat-facts-catfact-facts-api
+  name: Cat Facts (catfact.ninja) Facts API
+  description: Random cat trivia, individually or in paginated lists.
+  humanURL: https://catfact.ninja/
+  baseURL: https://catfact.ninja
+  tags:
+  - Facts
+  properties:
+  - type: OpenAPI
+    url: openapi/cat-facts-catfact-facts-api-openapi.yml
+  - type: Documentation
+    url: https://catfact.ninja/
+  - type: SwaggerUI
+    url: https://catfact.ninja/
+  - type: OpenAPISource
+    url: https://catfact.ninja/docs?api-docs.json
 common:
   - type: AgenticAccess
     url: agentic-access/cat-facts-catfact-agentic-access.yml
