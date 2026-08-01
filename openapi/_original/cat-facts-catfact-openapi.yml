@@ -1,0 +1,384 @@
+openapi: 3.0.3
+info:
+  title: Cat Facts API
+  description: >-
+    A free, no-authentication REST API at catfact.ninja serving random cat trivia and
+    a catalog of cat breeds. Three GET endpoints: /fact (a single random fact), /facts
+    (paginated list of facts), and /breeds (paginated list of breeds). Designed as a
+    canonical "hello world" public API for tutorials, demos, and agent tool examples.
+  contact:
+    name: Cat Facts API
+    email: contact@catfact.ninja
+    url: https://catfact.ninja/
+  license:
+    name: Free Public API
+    url: https://catfact.ninja/
+  version: 1.0.0
+  x-generated-from: documentation
+  x-source-url: https://catfact.ninja/docs?api-docs.json
+  x-last-validated: '2026-05-30'
+servers:
+  - url: https://catfact.ninja
+    description: Cat Facts API production server.
+tags:
+  - name: Facts
+    description: Random cat trivia, individually or in paginated lists.
+  - name: Breeds
+    description: Catalog of cat breeds with country, origin, coat, and pattern.
+paths:
+  /fact:
+    get:
+      tags:
+        - Facts
+      summary: Get Random Fact
+      description: >-
+        Returns a single random cat fact. An optional max_length query parameter caps
+        the returned fact length, which is useful for SMS, push notifications, and
+        any other length-constrained surface.
+      operationId: getRandomFact
+      parameters:
+        - name: max_length
+          in: query
+          description: Maximum length, in characters, of the returned fact.
+          required: false
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+            example: 140
+      responses:
+        '200':
+          description: A random cat fact.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CatFact'
+              examples:
+                GetRandomFact200Example:
+                  summary: Default getRandomFact 200 response
+                  x-microcks-default: true
+                  value:
+                    fact: People who are allergic to cats are actually allergic to cat saliva or to cat dander.
+                    length: 89
+        '404':
+          description: No fact matched the given constraints.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                GetRandomFact404Example:
+                  summary: Default getRandomFact 404 response
+                  value:
+                    message: Fact not found
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /facts:
+    get:
+      tags:
+        - Facts
+      summary: Get a List of Facts
+      description: >-
+        Returns a paginated list of cat facts. Supports max_length (character cap per
+        fact) and limit (page size) query parameters. The response follows Laravel's
+        paginator format with current_page, per_page, total, last_page, links, and a
+        data array of CatFact objects.
+      operationId: getFacts
+      parameters:
+        - name: max_length
+          in: query
+          description: Maximum length, in characters, of each returned fact.
+          required: false
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+            example: 140
+        - name: limit
+          in: query
+          description: Number of facts to return per page.
+          required: false
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+            example: 10
+      responses:
+        '200':
+          description: A paginated list of cat facts.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CatFactList'
+              examples:
+                GetFacts200Example:
+                  summary: Default getFacts 200 response
+                  x-microcks-default: true
+                  value:
+                    current_page: 1
+                    data:
+                      - fact: Unlike dogs, cats do not have a sweet tooth.
+                        length: 45
+                      - fact: When a cat chases its prey, it keeps its head level.
+                        length: 53
+                    first_page_url: https://catfact.ninja/facts?page=1
+                    from: 1
+                    last_page: 111
+                    last_page_url: https://catfact.ninja/facts?page=111
+                    next_page_url: https://catfact.ninja/facts?page=2
+                    path: https://catfact.ninja/facts
+                    per_page: 2
+                    prev_page_url: null
+                    to: 2
+                    total: 332
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /breeds:
+    get:
+      tags:
+        - Breeds
+      summary: Get a List of Breeds
+      description: >-
+        Returns a paginated list of cat breeds with country, origin, coat, and
+        pattern attributes. Supports a limit query parameter for page size. The
+        response follows Laravel's paginator format with current_page, per_page,
+        total, last_page, links, and a data array of Breed objects.
+      operationId: getBreeds
+      parameters:
+        - name: limit
+          in: query
+          description: Number of breeds to return per page.
+          required: false
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+            example: 10
+      responses:
+        '200':
+          description: A paginated list of cat breeds.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BreedList'
+              examples:
+                GetBreeds200Example:
+                  summary: Default getBreeds 200 response
+                  x-microcks-default: true
+                  value:
+                    current_page: 1
+                    data:
+                      - breed: Abyssinian
+                        country: Ethiopia
+                        origin: Natural/Standard
+                        coat: Short
+                        pattern: Ticked
+                      - breed: Aegean
+                        country: Greece
+                        origin: Natural/Standard
+                        coat: Semi-long
+                        pattern: Bi- or tri-colored
+                    first_page_url: https://catfact.ninja/breeds?page=1
+                    from: 1
+                    last_page: 49
+                    last_page_url: https://catfact.ninja/breeds?page=49
+                    next_page_url: https://catfact.ninja/breeds?page=2
+                    path: https://catfact.ninja/breeds
+                    per_page: 2
+                    prev_page_url: null
+                    to: 2
+                    total: 98
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    CatFact:
+      type: object
+      title: CatFact
+      description: A single cat trivia fact and its character length.
+      properties:
+        fact:
+          type: string
+          description: The cat fact text.
+          example: Cats sleep 70% of their lives.
+        length:
+          type: integer
+          format: int32
+          description: Character length of the fact string.
+          example: 30
+      required:
+        - fact
+        - length
+    Breed:
+      type: object
+      title: Breed
+      description: A cat breed entry with descriptive attributes.
+      properties:
+        breed:
+          type: string
+          description: Common breed name.
+          example: Abyssinian
+        country:
+          type: string
+          description: Country the breed is associated with.
+          example: Ethiopia
+        origin:
+          type: string
+          description: Origin classification (Natural/Standard, Mutation, Crossbreed, etc.).
+          example: Natural/Standard
+        coat:
+          type: string
+          description: Coat length descriptor (Short, Semi-long, Long, Hairless).
+          example: Short
+        pattern:
+          type: string
+          description: Coat pattern descriptor.
+          example: Ticked
+      required:
+        - breed
+        - country
+        - origin
+        - coat
+        - pattern
+    PaginationLink:
+      type: object
+      title: PaginationLink
+      description: A single navigation link in a Laravel-style paginator response.
+      properties:
+        url:
+          type: string
+          nullable: true
+          description: Target URL of the link, or null for disabled controls.
+          example: https://catfact.ninja/facts?page=2
+        label:
+          type: string
+          description: Display label (page number, "Previous", "Next", or "...").
+          example: '2'
+        active:
+          type: boolean
+          description: Whether this link represents the current page.
+          example: false
+    CatFactList:
+      type: object
+      title: CatFactList
+      description: Laravel-style paginated wrapper around a list of CatFact objects.
+      properties:
+        current_page:
+          type: integer
+          format: int32
+          example: 1
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CatFact'
+        first_page_url:
+          type: string
+          example: https://catfact.ninja/facts?page=1
+        from:
+          type: integer
+          format: int32
+          nullable: true
+          example: 1
+        last_page:
+          type: integer
+          format: int32
+          example: 111
+        last_page_url:
+          type: string
+          example: https://catfact.ninja/facts?page=111
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaginationLink'
+        next_page_url:
+          type: string
+          nullable: true
+          example: https://catfact.ninja/facts?page=2
+        path:
+          type: string
+          example: https://catfact.ninja/facts
+        per_page:
+          type: integer
+          format: int32
+          example: 10
+        prev_page_url:
+          type: string
+          nullable: true
+          example: null
+        to:
+          type: integer
+          format: int32
+          nullable: true
+          example: 10
+        total:
+          type: integer
+          format: int32
+          example: 332
+    BreedList:
+      type: object
+      title: BreedList
+      description: Laravel-style paginated wrapper around a list of Breed objects.
+      properties:
+        current_page:
+          type: integer
+          format: int32
+          example: 1
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Breed'
+        first_page_url:
+          type: string
+          example: https://catfact.ninja/breeds?page=1
+        from:
+          type: integer
+          format: int32
+          nullable: true
+          example: 1
+        last_page:
+          type: integer
+          format: int32
+          example: 49
+        last_page_url:
+          type: string
+          example: https://catfact.ninja/breeds?page=49
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaginationLink'
+        next_page_url:
+          type: string
+          nullable: true
+          example: https://catfact.ninja/breeds?page=2
+        path:
+          type: string
+          example: https://catfact.ninja/breeds
+        per_page:
+          type: integer
+          format: int32
+          example: 10
+        prev_page_url:
+          type: string
+          nullable: true
+          example: null
+        to:
+          type: integer
+          format: int32
+          nullable: true
+          example: 10
+        total:
+          type: integer
+          format: int32
+          example: 98
+    Error:
+      type: object
+      title: Error
+      description: Generic error response payload.
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+          example: Fact not found

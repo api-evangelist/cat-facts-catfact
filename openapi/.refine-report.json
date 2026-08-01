@@ -1,0 +1,16 @@
+{
+  "provider": "cat-facts-catfact",
+  "sources": [
+    "cat-facts-catfact-breeds-api-openapi.yml",
+    "cat-facts-catfact-facts-api-openapi.yml"
+  ],
+  "outputs": [
+    "cat-facts-catfact-breeds-api-openapi.yml",
+    "cat-facts-catfact-facts-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
