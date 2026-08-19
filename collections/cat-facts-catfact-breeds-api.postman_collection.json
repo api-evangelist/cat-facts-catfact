@@ -1,0 +1,114 @@
+{
+  "item": [
+    {
+      "id": "7aeef385-a76b-4d2a-81ed-2f90ffe0d702",
+      "name": "Breeds",
+      "description": {
+        "content": "Catalog of cat breeds with country, origin, coat, and pattern.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1a0dd983-8d8d-4546-88cc-180c558399e7",
+          "name": "Get a List of Breeds",
+          "request": {
+            "name": "Get a List of Breeds",
+            "description": {
+              "content": "Returns a paginated list of cat breeds with country, origin, coat, and pattern attributes. Supports a limit query parameter for page size. The response follows Laravel's paginator format with current_page, per_page, total, last_page, links, and a data array of Breed objects.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "breeds"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of breeds to return per page."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d36d0884-97f5-4d68-bd46-a7cdf12b68c4",
+              "name": "A paginated list of cat breeds.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "breeds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"current_page\": 1,\n  \"data\": [\n    {\n      \"breed\": \"Abyssinian\",\n      \"country\": \"Ethiopia\",\n      \"origin\": \"Natural/Standard\",\n      \"coat\": \"Short\",\n      \"pattern\": \"Ticked\"\n    },\n    {\n      \"breed\": \"Aegean\",\n      \"country\": \"Greece\",\n      \"origin\": \"Natural/Standard\",\n      \"coat\": \"Semi-long\",\n      \"pattern\": \"Bi- or tri-colored\"\n    }\n  ],\n  \"first_page_url\": \"https://catfact.ninja/breeds?page=1\",\n  \"from\": 1,\n  \"last_page\": 49,\n  \"last_page_url\": \"https://catfact.ninja/breeds?page=49\",\n  \"next_page_url\": \"https://catfact.ninja/breeds?page=2\",\n  \"path\": \"https://catfact.ninja/breeds\",\n  \"per_page\": 2,\n  \"prev_page_url\": null,\n  \"to\": 2,\n  \"total\": 98\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://catfact.ninja",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "23beadd7-173f-43e2-9f66-9d95bb403018",
+    "name": "Cat Facts Breeds API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "A free, no-authentication REST API at catfact.ninja serving random cat trivia and a catalog of cat breeds. Three GET endpoints: /fact (a single random fact), /facts (paginated list of facts), and /breeds (paginated list of breeds). Designed as a canonical \"hello world\" public API for tutorials, demos, and agent tool examples.\n\nContact Support:\n Name: Cat Facts API\n Email: contact@catfact.ninja",
+      "type": "text/plain"
+    }
+  }
+}
