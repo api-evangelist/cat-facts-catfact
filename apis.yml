@@ -7,6 +7,17 @@ description: >-
   API onboarding tutorials, demos, and sample apps because it requires no API key and returns small, predictable JSON
   payloads.
 url: https://catfact.ninja/
+deliveryModel:
+  model: unknown
+  open_source: false
+  commercial: false
+  callable_host: true
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - openapi
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: open
