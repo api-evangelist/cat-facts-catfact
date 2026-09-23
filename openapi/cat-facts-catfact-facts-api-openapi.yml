@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Cat Breeds Facts API
+  title: Cat Facts API
   description: 'A free, no-authentication REST API at catfact.ninja serving random cat trivia and a catalog of cat breeds. Three GET endpoints: /fact (a single random fact), /facts (paginated list of facts), and /breeds (paginated list of breeds). Designed as a canonical "hello world" public API for tutorials, demos, and agent tool examples.'
   contact:
     name: Cat Facts API
@@ -143,23 +143,6 @@ components:
           type: boolean
           description: Whether this link represents the current page.
           example: false
-    CatFact:
-      type: object
-      title: CatFact
-      description: A single cat trivia fact and its character length.
-      properties:
-        fact:
-          type: string
-          description: The cat fact text.
-          example: Cats sleep 70% of their lives.
-        length:
-          type: integer
-          format: int32
-          description: Character length of the fact string.
-          example: 30
-      required:
-      - fact
-      - length
     Error:
       type: object
       title: Error
@@ -229,3 +212,20 @@ components:
           type: integer
           format: int32
           example: 332
+    CatFact:
+      type: object
+      title: CatFact
+      description: A single cat trivia fact and its character length.
+      properties:
+        fact:
+          type: string
+          description: The cat fact text.
+          example: Cats sleep 70% of their lives.
+        length:
+          type: integer
+          format: int32
+          description: Character length of the fact string.
+          example: 30
+      required:
+      - fact
+      - length

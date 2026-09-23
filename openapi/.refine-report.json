@@ -1,8 +1,7 @@
 {
   "provider": "cat-facts-catfact",
   "sources": [
-    "cat-facts-catfact-breeds-api-openapi.yml",
-    "cat-facts-catfact-facts-api-openapi.yml"
+    "_ae-authored/cat-facts-catfact-openapi.yml"
   ],
   "outputs": [
     "cat-facts-catfact-breeds-api-openapi.yml",
@@ -12,9 +11,12 @@
   "errors": [],
   "warnings": [],
   "notes": [
-    "cat-facts-catfact-breeds-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "cat-facts-catfact-facts-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "sourced from openapi/_original/ (0 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "cat-facts-catfact-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "cat-facts-catfact-breeds-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "cat-facts-catfact-facts-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
