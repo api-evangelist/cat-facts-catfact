@@ -51,7 +51,6 @@ apis:
   name: Cat Facts (catfact.ninja) Breeds API
   description: Catalog of cat breeds with country, origin, coat, and pattern.
   humanURL: https://catfact.ninja/
-  baseURL: https://catfact.ninja
   tags:
   - Breeds
   properties:
@@ -67,7 +66,6 @@ apis:
   name: Cat Facts (catfact.ninja) Facts API
   description: Random cat trivia, individually or in paginated lists.
   humanURL: https://catfact.ninja/
-  baseURL: https://catfact.ninja
   tags:
   - Facts
   properties:
