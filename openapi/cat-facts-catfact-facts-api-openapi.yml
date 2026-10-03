@@ -124,15 +124,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Error:
-      type: object
-      title: Error
-      description: Generic error response payload.
-      properties:
-        message:
-          type: string
-          description: Human-readable error message.
-          example: Fact not found
     CatFactList:
       type: object
       title: CatFactList
@@ -193,6 +184,15 @@ components:
           type: integer
           format: int32
           example: 332
+    Error:
+      type: object
+      title: Error
+      description: Generic error response payload.
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+          example: Fact not found
     CatFact:
       type: object
       title: CatFact

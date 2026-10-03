@@ -76,37 +76,25 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Breed:
+    PaginationLink:
       type: object
-      title: Breed
-      description: A cat breed entry with descriptive attributes.
+      title: PaginationLink
+      description: A single navigation link in a Laravel-style paginator response.
       properties:
-        breed:
+        url:
+          type:
+          - string
+          - 'null'
+          description: Target URL of the link, or null for disabled controls.
+          example: https://catfact.ninja/facts?page=2
+        label:
           type: string
-          description: Common breed name.
-          example: Abyssinian
-        country:
-          type: string
-          description: Country the breed is associated with.
-          example: Ethiopia
-        origin:
-          type: string
-          description: Origin classification (Natural/Standard, Mutation, Crossbreed, etc.).
-          example: Natural/Standard
-        coat:
-          type: string
-          description: Coat length descriptor (Short, Semi-long, Long, Hairless).
-          example: Short
-        pattern:
-          type: string
-          description: Coat pattern descriptor.
-          example: Ticked
-      required:
-      - breed
-      - country
-      - origin
-      - coat
-      - pattern
+          description: Display label (page number, "Previous", "Next", or "...").
+          example: '2'
+        active:
+          type: boolean
+          description: Whether this link represents the current page.
+          example: false
     BreedList:
       type: object
       title: BreedList
@@ -167,22 +155,34 @@ components:
           type: integer
           format: int32
           example: 98
-    PaginationLink:
+    Breed:
       type: object
-      title: PaginationLink
-      description: A single navigation link in a Laravel-style paginator response.
+      title: Breed
+      description: A cat breed entry with descriptive attributes.
       properties:
-        url:
-          type:
-          - string
-          - 'null'
-          description: Target URL of the link, or null for disabled controls.
-          example: https://catfact.ninja/facts?page=2
-        label:
+        breed:
           type: string
-          description: Display label (page number, "Previous", "Next", or "...").
-          example: '2'
-        active:
-          type: boolean
-          description: Whether this link represents the current page.
-          example: false
+          description: Common breed name.
+          example: Abyssinian
+        country:
+          type: string
+          description: Country the breed is associated with.
+          example: Ethiopia
+        origin:
+          type: string
+          description: Origin classification (Natural/Standard, Mutation, Crossbreed, etc.).
+          example: Natural/Standard
+        coat:
+          type: string
+          description: Coat length descriptor (Short, Semi-long, Long, Hairless).
+          example: Short
+        pattern:
+          type: string
+          description: Coat pattern descriptor.
+          example: Ticked
+      required:
+      - breed
+      - country
+      - origin
+      - coat
+      - pattern
