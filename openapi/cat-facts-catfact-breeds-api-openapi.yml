@@ -76,25 +76,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    PaginationLink:
-      type: object
-      title: PaginationLink
-      description: A single navigation link in a Laravel-style paginator response.
-      properties:
-        url:
-          type:
-          - string
-          - 'null'
-          description: Target URL of the link, or null for disabled controls.
-          example: https://catfact.ninja/facts?page=2
-        label:
-          type: string
-          description: Display label (page number, "Previous", "Next", or "...").
-          example: '2'
-        active:
-          type: boolean
-          description: Whether this link represents the current page.
-          example: false
     BreedList:
       type: object
       title: BreedList
@@ -186,3 +167,22 @@ components:
       - origin
       - coat
       - pattern
+    PaginationLink:
+      type: object
+      title: PaginationLink
+      description: A single navigation link in a Laravel-style paginator response.
+      properties:
+        url:
+          type:
+          - string
+          - 'null'
+          description: Target URL of the link, or null for disabled controls.
+          example: https://catfact.ninja/facts?page=2
+        label:
+          type: string
+          description: Display label (page number, "Previous", "Next", or "...").
+          example: '2'
+        active:
+          type: boolean
+          description: Whether this link represents the current page.
+          example: false

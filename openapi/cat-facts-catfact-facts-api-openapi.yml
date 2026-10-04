@@ -124,6 +124,51 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    PaginationLink:
+      type: object
+      title: PaginationLink
+      description: A single navigation link in a Laravel-style paginator response.
+      properties:
+        url:
+          type:
+          - string
+          - 'null'
+          description: Target URL of the link, or null for disabled controls.
+          example: https://catfact.ninja/facts?page=2
+        label:
+          type: string
+          description: Display label (page number, "Previous", "Next", or "...").
+          example: '2'
+        active:
+          type: boolean
+          description: Whether this link represents the current page.
+          example: false
+    Error:
+      type: object
+      title: Error
+      description: Generic error response payload.
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+          example: Fact not found
+    CatFact:
+      type: object
+      title: CatFact
+      description: A single cat trivia fact and its character length.
+      properties:
+        fact:
+          type: string
+          description: The cat fact text.
+          example: Cats sleep 70% of their lives.
+        length:
+          type: integer
+          format: int32
+          description: Character length of the fact string.
+          example: 30
+      required:
+      - fact
+      - length
     CatFactList:
       type: object
       title: CatFactList
@@ -184,48 +229,3 @@ components:
           type: integer
           format: int32
           example: 332
-    Error:
-      type: object
-      title: Error
-      description: Generic error response payload.
-      properties:
-        message:
-          type: string
-          description: Human-readable error message.
-          example: Fact not found
-    CatFact:
-      type: object
-      title: CatFact
-      description: A single cat trivia fact and its character length.
-      properties:
-        fact:
-          type: string
-          description: The cat fact text.
-          example: Cats sleep 70% of their lives.
-        length:
-          type: integer
-          format: int32
-          description: Character length of the fact string.
-          example: 30
-      required:
-      - fact
-      - length
-    PaginationLink:
-      type: object
-      title: PaginationLink
-      description: A single navigation link in a Laravel-style paginator response.
-      properties:
-        url:
-          type:
-          - string
-          - 'null'
-          description: Target URL of the link, or null for disabled controls.
-          example: https://catfact.ninja/facts?page=2
-        label:
-          type: string
-          description: Display label (page number, "Previous", "Next", or "...").
-          example: '2'
-        active:
-          type: boolean
-          description: Whether this link represents the current page.
-          example: false
