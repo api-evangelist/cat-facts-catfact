@@ -1,21 +1,24 @@
 {
   "provider": "cat-facts-catfact",
   "sources": [
-    "_ae-authored/cat-facts-catfact-openapi.yml"
+    "_original/cat-facts-catfact-openapi.json"
   ],
   "outputs": [
     "cat-facts-catfact-breeds-api-openapi.yml",
-    "cat-facts-catfact-facts-api-openapi.yml"
+    "cat-facts-catfact-facts-api-openapi.yml",
+    "cat-facts-catfact-mcp-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
   "notes": [
-    "sourced from openapi/_original/ (0 archived document(s)); previously refined output at the top level was skipped rather than re-split",
-    "cat-facts-catfact-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "apis.yml register: already-registered"
+    "1 archived document(s) dropped as subsets of other archived documents",
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "cat-facts-catfact-openapi.json: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "apis.yml register: written (+1 apis, 3 total)"
   ],
   "skipped": [
+    "_ae-authored/cat-facts-catfact-openapi.yml: archived document superseded by a larger archived document",
     "cat-facts-catfact-breeds-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "cat-facts-catfact-facts-api-openapi.yml: previously refined output, superseded by openapi/_original/"
   ]
