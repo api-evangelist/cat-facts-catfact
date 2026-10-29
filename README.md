@@ -1,4 +1,4 @@
-# Cat Facts (catfact.ninja) (cat-facts-catfact)
+# Cat Facts (catfact.ninja)
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,64 +66,145 @@
 
 Cat Facts is a free, no-authentication community REST API at catfact.ninja that serves random cat trivia and a catalog of cat breeds. It exposes three documented endpoints — a single random fact, a paginated list of facts, and a paginated list of breeds — and ships a Swagger UI based OpenAPI 3.0 document at /docs. The service is widely used in API onboarding tutorials, demos, and sample apps because it requires no API key and returns small, predictable JSON payloads.
 
-**APIs.json:** [https://catfact.ninja/](https://catfact.ninja/)
+**Areas:** Animals · Cats · Trivia · Public APIs · Community · No Authentication · REST
 
-## Tags
+## Cat Facts (catfact.ninja) on APIs.io
 
-- Animals
-- Cats
-- Trivia
-- Public APIs
-- Community
-- No Authentication
-- REST
+Everything profiled for Cat Facts (catfact.ninja) is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/cat-facts-catfact/](https://apis.io/providers/cat-facts-catfact/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (2)
 
-- **Created:** 2026-05-28
-- **Modified:** 2026-05-30
+- [Cat Facts (catfact.ninja) Breeds API](https://apis.io/apis/cat-facts-catfact/cat-facts-catfact-breeds-api/) — Catalog of cat breeds with country, origin, coat, and pattern.
+- [Cat Facts (catfact.ninja) Facts API](https://apis.io/apis/cat-facts-catfact/cat-facts-catfact-facts-api/) — Random cat trivia, individually or in paginated lists.
 
-## APIs
+### Published properties
 
-### Cat Facts API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-REST API exposing random cat trivia and a catalog of cat breeds. Three GET endpoints — /fact (a single random fact), /facts (paginated list of facts) and /breeds (paginated list of breeds) — return Laravel-style paginated JSON for the list endpoints.
+#### Agentic access (1)
 
-- **Human URL:** [https://catfact.ninja/](https://catfact.ninja/)
-- **Base URL:** `https://catfact.ninja`
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Tags
+- [Cat Facts Catfact Agentic Access](https://apis.io/agentic-access/cat-facts-catfact/cat-facts-catfact-agentic-access/)
 
-- Animals
-- Cats
-- Trivia
-- Public APIs
+#### JSON Schema (5)
 
-#### Properties
+The data models the API reads and writes.
 
-- [Documentation](https://catfact.ninja/)
-- [Swagger U I](https://catfact.ninja/)
-- [OpenAPI](openapi/cat-facts-catfact-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/cat-facts-catfact.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/cat-facts-catfact.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Open A P I Source](https://catfact.ninja/docs?api-docs.json)
+- [Breed](https://apis.io/schemas/cat-facts-catfact/cat-facts-catfact-breed/)
+- [BreedList](https://apis.io/schemas/cat-facts-catfact/cat-facts-catfact-breed-list/)
+- [CatFact](https://apis.io/schemas/cat-facts-catfact/cat-facts-catfact-cat-fact/)
+- [CatFactList](https://apis.io/schemas/cat-facts-catfact/cat-facts-catfact-cat-fact-list/)
+- [PaginationLink](https://apis.io/schemas/cat-facts-catfact/cat-facts-catfact-pagination-link/)
 
-## Common Properties
+#### JSON Structure (5)
+
+Data models expressed in JSON Structure.
+
+- [Cat Facts Catfact Breed List Structure](https://apis.io/json-structure/cat-facts-catfact/cat-facts-catfact-breed-list-structure/)
+- [Cat Facts Catfact Breed Structure](https://apis.io/json-structure/cat-facts-catfact/cat-facts-catfact-breed-structure/)
+- [Cat Facts Catfact Cat Fact List Structure](https://apis.io/json-structure/cat-facts-catfact/cat-facts-catfact-cat-fact-list-structure/)
+- [Cat Facts Catfact Cat Fact Structure](https://apis.io/json-structure/cat-facts-catfact/cat-facts-catfact-cat-fact-structure/)
+- [Cat Facts Catfact Pagination Link Structure](https://apis.io/json-structure/cat-facts-catfact/cat-facts-catfact-pagination-link-structure/)
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Cat Facts Catfact Context](https://apis.io/jsonld/cat-facts-catfact/cat-facts-catfact-context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [Cat Facts Catfact Vocabulary](https://apis.io/vocabularies/cat-facts-catfact/cat-facts-catfact-vocabulary/)
+
+#### Examples (5)
+
+Example requests and responses.
+
+- [Cat Facts Catfact Breed Example](https://apis.io/examples/cat-facts-catfact/cat-facts-catfact-breed-example/)
+- [Cat Facts Catfact Breed List Example](https://apis.io/examples/cat-facts-catfact/cat-facts-catfact-breed-list-example/)
+- [Cat Facts Catfact Cat Fact Example](https://apis.io/examples/cat-facts-catfact/cat-facts-catfact-cat-fact-example/)
+- [Cat Facts Catfact Cat Fact List Example](https://apis.io/examples/cat-facts-catfact/cat-facts-catfact-cat-fact-list-example/)
+- [Cat Facts Catfact Pagination Link Example](https://apis.io/examples/cat-facts-catfact/cat-facts-catfact-pagination-link-example/)
+
+#### Collections (3)
+
+Postman and Open Collection request collections.
+
+- [Cat Facts API](https://apis.io/collections/cat-facts-catfact/open-cat-facts-catfact/)
+- [Cat Facts Breeds API](https://apis.io/collections/cat-facts-catfact/open-cat-facts-catfact-breeds-api/)
+- [Cat Breeds Facts API](https://apis.io/collections/cat-facts-catfact/open-cat-facts-catfact-facts-api/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [Cat Facts (catfact.ninja) — jsonschema rules](https://apis.io/rules/cat-facts-catfact/cat-facts-catfact-jsonschema-spectral-rules/)
+- [Cat Facts (catfact.ninja) API Rules](https://apis.io/rules/cat-facts-catfact/cat-facts-catfact-rules/)
+
+#### Security (1)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Cat Facts Catfact Domain Security](https://apis.io/security/cat-facts-catfact/cat-facts-catfact-domain-security/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://catfact.ninja/)
-- [Swagger U I](https://catfact.ninja/)
-- [OpenAPI](https://catfact.ninja/docs?api-docs.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Contact Email](mailto:contact@catfact.ninja)
-- [Public APIs Listing](https://github.com/public-apis/public-apis)
-- [Authentication](https://catfact.ninja/)
-- [Tools](https://github.com/cursethevulgar/catfact-mcp-server)
-- [Tools](https://github.com/mtrmarko/cat-facts-mcp)
-- [Tools](https://github.com/volspan-deployments/cat-facts-mcp)
-- [Spectral Rules](rules/cat-facts-catfact-rules.yml)
-- [Vocabulary](vocabulary/cat-facts-catfact-vocabulary.yml)
-- [J S O N L D Context](json-ld/cat-facts-catfact-context.jsonld)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 19.5** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 64.3 |
+| Contract quality | 20.9 |
+| Contract governance | 27.3 |
+| Operational transparency | 0.0 |
+| Developer ergonomics | 21.4 |
+| Access clarity | 0.0 |
+
+**Agent readiness 25.8** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | na |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | na |
+| Error Semantics | — |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | na |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 16.7** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/cat-facts-catfact/](https://apis.io/providers/cat-facts-catfact/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Cat Facts (catfact.ninja): the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/cat-facts-catfact/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
